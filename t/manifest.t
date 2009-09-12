@@ -11,7 +11,7 @@ if ( not $ENV{TEST_AUTHOR} ) {
 eval { require Test::CheckManifest; };
 
 if ( $@ ) {
-   my $msg = 'Test::Manifest required to criticise code';
+   my $msg = 'Test::CheckManifest required to criticise code';
    plan( skip_all => $msg );
 }
 

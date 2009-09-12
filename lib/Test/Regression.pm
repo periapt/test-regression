@@ -5,7 +5,7 @@ use strict;
 
 =head1 NAME
 
-Test::Regression - The great new Test::Regression!
+Test::Regression - Test library that can be run in two modes: once to generate outputs and secondly to compare against them
 
 =head1 VERSION
 
@@ -18,34 +18,49 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
-    use Test::Regression;
-
-    my $foo = Test::Regression->new();
-    ...
+ok_run(sub {print "hello world"}, "hello_world.txt");
 
 =head1 EXPORT
 
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
+ok_run
+
+=cut
+
+use Test::Builder::Module;
+our @ISA    = qw(Test::Builder::Module);
+our @EXPORT = qw(ok_regression);
+my $CLASS = __PACKAGE__;
 
 =head1 FUNCTIONS
 
-=head2 function1
+=head2 ok_regression
+
+This function expects two arguments: a CODE ref and a file path. 
+If the TEST_REGRESSION_GEN is set to a true value, then the CODE ref is run and the 
+output written to the file. Otherwise the output of the
+file is compared against the contents of the file.
+There is a third optional argument which is the test name.
 
 =cut
 
-sub function1 {
-}
+sub ok_regression {
+	my $code_ref = shift;
+	my $file = shift;
+	my $test_name = shift;
+	my $output = eval {&$code_ref();};
+	if ($@) {
+		my $tb = $CLASS->builder;
+		$tb->diag($@);
+		return $tb->ok(0, $testname);
+	}
 
-=head2 function2
+	# generate the output files if required
+	if ($ENV{TEST_REGRESSION_GEN}) {
+		return $tb->ok(1, $testname);
+	}
 
-=cut
-
-sub function2 {
+	# compare the files
+	return $tb->ok(1, $testname);
 }
 
 =head1 AUTHOR
