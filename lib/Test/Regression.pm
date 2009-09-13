@@ -10,17 +10,17 @@ Test::Regression - Test library that can be run in two modes: once to generate o
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 =head1 SYNOPSIS
 
 use Test::Regression;
-ok_regression(sub {print "hello world"}, "t/out/hello_world.txt");
+ok_regression(sub {return "hello world"}, "t/out/hello_world.txt");
 
 =head1 EXPORT
 
