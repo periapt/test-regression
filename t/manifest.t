@@ -15,5 +15,5 @@ if ( $@ ) {
    plan( skip_all => $msg );
 }
 
-Test::CheckManifest::ok_manifest({filter=>[qr/\/\.git/,qr/\.bak$/]});
+Test::CheckManifest::ok_manifest({filter=>[qr/\/\.git/,qr/\.bak$/,qr/t\/output\//,qr/\.old$/]});
 

@@ -7,8 +7,11 @@ t/00-load.t
 t/boilerplate.t
 t/changes.t
 t/manifest.t
+t/output/f1
+t/output/f2
 t/perlcritic.t
 t/perlcriticrc
 t/pod-coverage.t
 t/pod.t
 t/podspell.t
+t/regression.t

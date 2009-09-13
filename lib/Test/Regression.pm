@@ -2,6 +2,7 @@ package Test::Regression;
 
 use warnings;
 use strict;
+use FileHandle;
 
 =head1 NAME
 
@@ -18,16 +19,18 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-ok_run(sub {print "hello world"}, "hello_world.txt");
+use Test::Regression;
+ok_regression(sub {print "hello world"}, "t/out/hello_world.txt");
 
 =head1 EXPORT
 
-ok_run
+ok_regression
 
 =cut
 
 use Test::Builder::Module;
-our @ISA    = qw(Test::Builder::Module);
+use Test::Differences;
+use base qw(Test::Builder::Module);
 our @EXPORT = qw(ok_regression);
 my $CLASS = __PACKAGE__;
 
@@ -35,7 +38,9 @@ my $CLASS = __PACKAGE__;
 
 =head2 ok_regression
 
-This function expects two arguments: a CODE ref and a file path. 
+This function requires two arguments: a CODE ref and a file path. 
+The CODE ref is expected to return a SCALAR string which 
+can be compared against previous runs.
 If the TEST_REGRESSION_GEN is set to a true value, then the CODE ref is run and the 
 output written to the file. Otherwise the output of the
 file is compared against the contents of the file.
@@ -48,19 +53,27 @@ sub ok_regression {
 	my $file = shift;
 	my $test_name = shift;
 	my $output = eval {&$code_ref();};
+	my $tb = $CLASS->builder;
 	if ($@) {
-		my $tb = $CLASS->builder;
 		$tb->diag($@);
-		return $tb->ok(0, $testname);
+		return $tb->ok(0, $test_name);
 	}
 
 	# generate the output files if required
 	if ($ENV{TEST_REGRESSION_GEN}) {
-		return $tb->ok(1, $testname);
+		my $fh = FileHandle->new;
+		$fh->open(">$file") ||  return $tb->ok(0, "$test_name: cannot open $file");
+		print {$fh} $output || return $tb->ok(0, "actual write failed: $file");
+		return $tb->ok($fh->close, $test_name);
 	}
 
 	# compare the files
-	return $tb->ok(1, $testname);
+	return $tb->ok(0, "$test_name: cannot read $file") unless -r $file;
+	my $fh = FileHandle->new;
+	$fh->open("<$file") ||  return $tb->ok(0, "$test_name: cannot open $file");
+	my $content = join '', (<$fh>);
+	eq_or_diff($output, $content, $test_name);
+	return $output eq $file;
 }
 
 =head1 AUTHOR
@@ -73,8 +86,11 @@ Please report any bugs or feature requests to C<bug-test-regression at rt.cpan.o
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Regression>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
+=head2 testing of STDERR
 
-
+The testing of stderr from this module is not as thorough as I would like. L<Test::Builder::Tester> allows turning
+off of stderr checking but not matching by regular expression. Handcrafted efforts currently fall foul of L<Test::Harness>.
+Still it is I believe adequately tested in terms of coverage.
 
 =head1 SUPPORT
 
