@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 use Test::More;
-use Test::CheckManifest;
 
 if ( not $ENV{TEST_AUTHOR} ) {
     my $msg = 'Author test.  Set $ENV{TEST_AUTHOR} to a true value to run.';
@@ -11,9 +10,9 @@ if ( not $ENV{TEST_AUTHOR} ) {
 eval { require Test::CheckManifest; };
 
 if ( $@ ) {
-   my $msg = 'Test::CheckManifest required to criticise code';
+   my $msg = 'Test::CheckManifest required to check manifest';
    plan( skip_all => $msg );
 }
 
-Test::CheckManifest::ok_manifest({filter=>[qr/\/\.git/,qr/\.bak$/,qr/t\/output\//,qr/\.old$/,qr/Test-Regression\-.*\.tar\.gz$/]});
+Test::CheckManifest::ok_manifest({filter=>[qr/\/\.git/,qr/\.bak$/,qr/\.old$/,qr/t\/dbfile$/,qr/\.tar\.gz$/]});
 

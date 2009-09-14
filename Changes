@@ -4,4 +4,4 @@ Revision history for Test-Regression
         First version
 
 0.02	13-09-2009
-	Headlien documentation error
+	Headline documentation error. Fixed t/changes.t and t/manifest.t
