@@ -5,3 +5,6 @@ Revision history for Test-Regression
 
 0.02	13-09-2009
 	Headline documentation error. Fixed t/changes.t and t/manifest.t
+
+0.03 	20-09-2009
+	Added more dependencies and license

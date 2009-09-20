@@ -13,8 +13,11 @@ WriteMakefile(
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
-	'Test::Differences' => 0
+	'Test::Differences' => 0,
+	'Text::Diff' => 0,
+	'Algorithm::Diff' => 0
     },
+    LICENSE		=> 'perl',
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Test-Regression-*' },
 );
