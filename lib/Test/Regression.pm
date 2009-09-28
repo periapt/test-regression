@@ -6,7 +6,7 @@ use FileHandle;
 
 =head1 NAME
 
-Test::Regression - Test library that can be run in two modes: once to generate outputs and secondly to compare against them
+Test::Regression - Test library that can be run in two modes; one to generate outputs and a second to compare against them
 
 =head1 VERSION
 
