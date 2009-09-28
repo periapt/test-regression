@@ -10,17 +10,23 @@ Test::Regression - Test library that can be run in two modes: once to generate o
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
-
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
-use Test::Regression;
-ok_regression(sub {return "hello world"}, "t/out/hello_world.txt");
+  use Test::Regression;
+  ok_regression(sub {return "hello world"}, "t/out/hello_world.txt");
+
+=head1 DESCRIPTION
+
+Using the various Test:: modules you can compare the output of a function against what you expect.
+However if the output is complex and changes from version to version, maintenance of the expected
+output could be costly. This module allows one to use the test code to generate the expected output,
+so that if the differences with model output are expected, one can easily refresh the model output.
 
 =head1 EXPORT
 
@@ -76,6 +82,18 @@ sub ok_regression {
 	return $output eq $file;
 }
 
+=head1 ENVIRONMENT VARIABLES
+
+=head2 TEST_REGRESSION_GEN
+
+If the TEST_REGRESSION_GEN environment file is unset or false in a perl sense, then the named output files must exist and be readable and the
+test will run normally comparing the outputs of the CODE refs against the contents of those files. If the environment variable is true in 
+a perl sense, then model output files will be overwritten with the output of the CODE ref.
+
+=head1 ACKNOWLEDGEMENTS
+
+Some documentation improvements have been suggested by toolic (http://perlmonks.org/?node_id=622051).
+
 =head1 AUTHOR
 
 Nicholas Bamber, C<< <nicholas at periapt.co.uk> >>
@@ -85,6 +103,10 @@ Nicholas Bamber, C<< <nicholas at periapt.co.uk> >>
 Please report any bugs or feature requests to C<bug-test-regression at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Regression>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
+
+=head2 META.yml
+
+The L<YAML::Syck> module is struggling with this module's META.yml for reasons I am still struggling with.
 
 =head2 testing of STDERR
 

@@ -17,7 +17,6 @@ WriteMakefile(
 	'Text::Diff' => 0,
 	'Algorithm::Diff' => 0
     },
-    LICENSE		=> 'perl',
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Test-Regression-*' },
 );
