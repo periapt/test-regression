@@ -90,10 +90,6 @@ If the TEST_REGRESSION_GEN environment file is unset or false in a perl sense, t
 test will run normally comparing the outputs of the CODE refs against the contents of those files. If the environment variable is true in 
 a perl sense, then model output files will be overwritten with the output of the CODE ref.
 
-=head1 ACKNOWLEDGEMENTS
-
-Some documentation improvements have been suggested by toolic (http://perlmonks.org/?node_id=622051).
-
 =head1 AUTHOR
 
 Nicholas Bamber, C<< <nicholas at periapt.co.uk> >>
@@ -146,6 +142,7 @@ L<http://search.cpan.org/dist/Test-Regression/>
 
 =head1 ACKNOWLEDGEMENTS
 
+Some documentation improvements have been suggested by toolic (http://perlmonks.org/?node_id=622051).
 
 =head1 COPYRIGHT & LICENSE
 
