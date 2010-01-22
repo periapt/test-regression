@@ -11,3 +11,7 @@ Revision history for Test-Regression
 
 0.04 	28-09-2009
 	Various documentation changes
+
+0.05 	21-01-2010
+	Tested for zero-length output in generating file (rt53893).
+	Added tests for 'open' and 'print' functions failing.

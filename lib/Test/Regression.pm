@@ -70,9 +70,9 @@ sub ok_regression {
 		my $fh = FileHandle->new;
 		$fh->open(">$file") ||  return $tb->ok(0, "$test_name: cannot open $file");
 		if (length $output) {
-			print {$fh} $output || return $tb->ok(0, "actual write failed: $file");
+			$fh->print($output) || return $tb->ok(0, "actual write failed: $file");
 		}
-		return $tb->ok($fh->close, $test_name);
+		return $tb->ok(1, $test_name);
 	}
 
 	# compare the files

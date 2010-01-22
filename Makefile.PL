@@ -14,6 +14,7 @@ WriteMakefile(
     PREREQ_PM => {
         'Test::More' => 0,
 	'Test::Differences' => 0,
+	'Test::MockObject'=>0,
 	'Text::Diff' => 0,
 	'Algorithm::Diff' => 0
     },
