@@ -17,3 +17,4 @@ t/pod.t
 t/podspell.t
 t/regression.t
 t/prereq.t
+META.yml
