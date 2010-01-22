@@ -9,6 +9,7 @@ t/changes.t
 t/manifest.t
 t/output/f1
 t/output/f2
+t/output/f4
 t/perlcritic.t
 t/perlcriticrc
 t/pod-coverage.t
