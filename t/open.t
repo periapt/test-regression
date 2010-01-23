@@ -2,8 +2,23 @@
 
 use strict;
 use warnings;
-use Test::Builder::Tester tests => 1;
+our $mock;
+
+use Test::Builder::Tester tests => 3;
 use Test::More;
+BEGIN {
+  eval "use Test::MockObject::Extends";
+  unless( $@ ) {
+    use FileHandle;
+    $mock= Test::MockObject::Extends->new(FileHandle->new);
+    $mock->fake_new( 'FileHandle' );
+    $mock->set_false( 'open' );
+  }
+
+  use_ok( 'FileHandle' );
+  use_ok( 'Test::Regression' );
+}
+
 use Test::Regression;
 srand(42);
 system("rm -rf t/output");
@@ -25,23 +40,17 @@ sub unfaithful_function {
     return $r;
 }
 
-sub fatal_function {
-    die "How am I doing?";
-}
-
 sub empty_string_function {
     return '';
 }
 
 
-test_out("ok 1 - f1 gen");
-test_out("ok 2 - f1 check");
-test_out("ok 3 - f2 gen");
-test_out("not ok 4 - f2 check");
-test_out("not ok 5 - f3 gen");
-test_out("not ok 6 - f3 check");
-test_out("ok 7 - f4 gen");
-test_out("ok 8 - f4 check");
+test_out("not ok 1 - f1 gen: cannot open t/output/f1");
+test_out("not ok 2 - f1 check: cannot read t/output/f1");
+test_out("not ok 3 - f2 gen: cannot open t/output/f2");
+test_out("not ok 4 - f2 check: cannot read t/output/f2");
+test_out("not ok 5 - f4 gen: cannot open t/output/f4");
+test_out("not ok 6 - f4 check: cannot read t/output/f4");
 test_diag("  Failed test 'f2 check'");
 
 $ENV{TEST_REGRESSION_GEN} = 1;
@@ -52,10 +61,6 @@ $ENV{TEST_REGRESSION_GEN} = 1;
 ok_regression(\&unfaithful_function, "t/output/f2", "f2 gen");
 delete $ENV{TEST_REGRESSION_GEN};
 ok_regression(\&unfaithful_function, "t/output/f2", "f2 check");
-$ENV{TEST_REGRESSION_GEN} = 1;
-ok_regression(\&fatal_function, "t/output/f3", "f3 gen");
-delete $ENV{TEST_REGRESSION_GEN};
-ok_regression(\&fatal_function, "t/output/f3", "f3 check");
 $ENV{TEST_REGRESSION_GEN} = 1;
 ok_regression(\&empty_string_function, "t/output/f4", "f4 gen");
 delete $ENV{TEST_REGRESSION_GEN};

@@ -8,8 +8,8 @@ t/00-load.t
 t/boilerplate.t
 t/changes.t
 t/manifest.t
-t/output/f1
-t/output/f2
+t/print.t
+t/open.t
 t/perlcritic.t
 t/perlcriticrc
 t/pod-coverage.t

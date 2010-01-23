@@ -69,8 +69,10 @@ sub ok_regression {
 	if ($ENV{TEST_REGRESSION_GEN}) {
 		my $fh = FileHandle->new;
 		$fh->open(">$file") ||  return $tb->ok(0, "$test_name: cannot open $file");
-		print {$fh} $output || return $tb->ok(0, "actual write failed: $file");
-		return $tb->ok($fh->close, $test_name);
+		if (length $output) {
+			$fh->print($output) || return $tb->ok(0, "actual write failed: $file");
+		}
+		return $tb->ok(1, $test_name);
 	}
 
 	# compare the files
@@ -99,10 +101,6 @@ Nicholas Bamber, C<< <nicholas at periapt.co.uk> >>
 Please report any bugs or feature requests to C<bug-test-regression at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Regression>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
-
-=head2 META.yml
-
-The L<YAML::Syck> module is struggling with this module's META.yml for reasons I am still struggling with.
 
 =head2 testing of STDERR
 
@@ -142,7 +140,13 @@ L<http://search.cpan.org/dist/Test-Regression/>
 
 =head1 ACKNOWLEDGEMENTS
 
-Some documentation improvements have been suggested by toolic (http://perlmonks.org/?node_id=622051).
+=over
+
+=item Some documentation improvements have been suggested by toolic (http://perlmonks.org/?node_id=622051).
+
+=item Thanks to Filip GraliE<0x144>ski for pointing out I need to test against output of zero length and providing a patch.
+
+=back 
 
 =head1 COPYRIGHT & LICENSE
 

@@ -15,6 +15,6 @@ if ( $EVAL_ERROR ) {
    plan( skip_all => $msg );
 }
 
-Test::Spelling::add_stopwords(qw(CPAN Bamber AnnoCPAN RT internalId lang param HTML URLs href sitemap SQL bladger javascript loopName URL globalvars pageId pageid sitemaps XML changefreq en lastmod notfound pagelookup runmode runmodes url utf namespace upto stderr yml toolic));
+Test::Spelling::add_stopwords(qw(CPAN Bamber AnnoCPAN RT internalId lang param HTML URLs href sitemap SQL bladger javascript loopName URL globalvars pageId pageid sitemaps XML changefreq en lastmod notfound pagelookup runmode runmodes url utf namespace upto stderr yml toolic Filip Grali));
 Test::Spelling::all_pod_files_spelling_ok();
 
