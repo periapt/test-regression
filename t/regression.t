@@ -5,9 +5,9 @@ use warnings;
 use Test::Builder::Tester tests => 1;
 use Test::More;
 use Test::Regression;
+use lib qw(t/lib);
 srand(42);
-system("rm -rf t/output");
-system("mkdir t/output");
+use OutputDir;
 
 sub faithful_function {
     my $r = "";

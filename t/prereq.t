@@ -14,6 +14,6 @@ if ( $@) {
    plan( skip_all => $msg );
 }
 
-Test::Prereq::Build::prereq_ok(undef, 'prereq', ['Test::CheckChanges', 'Test::CheckManifest', 'Test::Spelling', 'Test::Prereq', 'Test::Prereq::Build', 'Test::Perl::Critic']);
+Test::Prereq::Build::prereq_ok(undef, 'prereq', ['Test::CheckChanges', 'Test::CheckManifest', 'Test::Spelling', 'Test::Prereq', 'Test::Prereq::Build', 'Test::Perl::Critic','OutputDir']);
 
 

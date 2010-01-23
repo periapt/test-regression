@@ -18,3 +18,4 @@ t/podspell.t
 t/regression.t
 t/prereq.t
 META.yml
+t/lib/OutputDir.pm

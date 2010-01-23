@@ -12,6 +12,8 @@ Module::Build->new(
     },
     build_requires => {
         'Test::MockObject' => 0,
+	'DirHandle' => 0,
+	'File::Spec' => 0
     },
     meta_merge => {
         resources=> {

@@ -21,8 +21,8 @@ BEGIN {
 
 use Test::Regression;
 srand(42);
-system("rm -rf t/output");
-system("mkdir t/output");
+use lib qw(t/lib);
+use OutputDir;
 
 sub faithful_function {
     my $r = "";
