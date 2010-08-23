@@ -19,7 +19,12 @@ our $VERSION = '0.05';
 =head1 SYNOPSIS
 
   use Test::Regression;
+
+  # read and write the regression file while generating os-specific newlines
   ok_regression(sub {return "hello world"}, "t/out/hello_world.txt");
+
+  # read and write the file without generating os-specific newlines
+  ok_regression(sub {return "hello world"}, "t/out/hello_world.txt", 'binmode');
 
 =head1 DESCRIPTION
 
@@ -51,6 +56,8 @@ If the TEST_REGRESSION_GEN is set to a true value, then the CODE ref is run and 
 output written to the file. Otherwise the output of the
 file is compared against the contents of the file.
 There is a third optional argument which is the test name.
+There is a fourth optional argument which is a boolean which enables read/write
+with bin mode if set to true.
 
 =cut
 
@@ -58,6 +65,7 @@ sub ok_regression {
 	my $code_ref = shift;
 	my $file = shift;
 	my $test_name = shift;
+	my $bin_mode = shift;
 	my $output = eval {&$code_ref();};
 	my $tb = $CLASS->builder;
 	if ($@) {
@@ -69,6 +77,7 @@ sub ok_regression {
 	if ($ENV{TEST_REGRESSION_GEN}) {
 		my $fh = FileHandle->new;
 		$fh->open(">$file") ||  return $tb->ok(0, "$test_name: cannot open $file");
+		$fh->binmode if $bin_mode;
 		if (length $output) {
 			$fh->print($output) || return $tb->ok(0, "actual write failed: $file");
 		}
@@ -79,6 +88,7 @@ sub ok_regression {
 	return $tb->ok(0, "$test_name: cannot read $file") unless -r $file;
 	my $fh = FileHandle->new;
 	$fh->open("<$file") ||  return $tb->ok(0, "$test_name: cannot open $file");
+	$fh->binmode if $bin_mode;
 	my $content = join '', (<$fh>);
 	eq_or_diff($output, $content, $test_name);
 	return $output eq $file;
