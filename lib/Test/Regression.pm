@@ -3,6 +3,7 @@ package Test::Regression;
 use warnings;
 use strict;
 use FileHandle;
+use utf8;
 
 =head1 NAME
 
@@ -153,7 +154,7 @@ L<http://search.cpan.org/dist/Test-Regression/>
 
 =item Some documentation improvements have been suggested by toolic (http://perlmonks.org/?node_id=622051).
 
-=item Thanks to Filip GraliE<0x144>ski for pointing out I need to test against output of zero length and providing a patch.
+=item Thanks to Filip Graliński for pointing out I need to test against output of zero length and providing a patch.
 
 =item Thanks to Christian Walde for pestering me about newline Windows
 compatibility issues and for providing a patch.
@@ -162,7 +163,7 @@ compatibility issues and for providing a patch.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 Nicholas Bamber.
+Copyright 2009-10 Nicholas Bamber.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
