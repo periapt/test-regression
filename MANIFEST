@@ -20,3 +20,4 @@ t/podspell.t
 t/prereq.t
 t/print.t
 t/regression.t
+META.json

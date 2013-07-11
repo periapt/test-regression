@@ -20,3 +20,6 @@ Revision history for Test-Regression
 0.06    19-11-2010
         Switched to binmode for better portability (rt60638).
         Thank to Christian Walde. Also switched to utf8 format for code.
+
+0.07    11-07-2013
+        Marked more tests as author tests to avoid bogus fails.

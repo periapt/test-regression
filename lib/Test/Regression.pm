@@ -11,11 +11,11 @@ Test::Regression - Test library that can be run in two modes; one to generate ou
 
 =head1 VERSION
 
-Version 0.06
+Version 0.07
 
 =cut
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 =head1 SYNOPSIS
 
