@@ -2,7 +2,12 @@
 
 use strict;
 use warnings;
-use Test::More tests => 3;
+use Test::More;
+
+if ( not $ENV{TEST_AUTHOR} ) {
+    my $msg = 'Author test.  Set $ENV{TEST_AUTHOR} to a true value to run.';
+    plan( skip_all => $msg );
+}
 
 sub not_in_file_ok {
     my ($filename, %regex) = @_;
