@@ -17,7 +17,7 @@ Module::Build->new(
     },
     meta_merge => {
         resources=> {
-            repository => 'http://github.com/periapt/test-regression/tree',
+            repository => 'http://github.com/periapt/test-regression',
         },
         keywords => ['Test','Regression'],
     },
