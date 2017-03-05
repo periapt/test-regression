@@ -60,7 +60,7 @@ There is a third optional argument which is the test name.
 sub ok_regression {
     my $code_ref  = shift;
     my $file      = shift;
-    my $test_name = shift;
+    my $test_name = shift || "unnamed regression test";
     my $output    = eval { &$code_ref(); };
     my $tb        = $CLASS->builder;
     if ($@) {
