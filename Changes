@@ -23,3 +23,7 @@ Revision history for Test-Regression
 
 0.07    11-07-2013
         Marked more tests as author tests to avoid bogus fails.
+
+0.08    05-03-2017
+        Mainly release engineering changes.
+        Removed a warning that occurred on error messages if no test name was provided.

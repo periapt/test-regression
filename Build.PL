@@ -1,3 +1,10 @@
+# release instructions:
+# bump version manually
+# perl Build.PL
+# Build manifest
+# Build distcheck
+# Build dist
+
 use Module::Build;
 
 Module::Build->new(
@@ -15,6 +22,7 @@ Module::Build->new(
 	'DirHandle' => 0,
 	'File::Spec' => 0
     },
+    configure_requires => { 'Module::Build' => 0.42 },
     meta_merge => {
         resources=> {
             repository => 'http://github.com/periapt/test-regression',

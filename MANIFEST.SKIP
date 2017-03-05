@@ -1,0 +1,11 @@
+\.bak$
+^Build$
+^Build.bat$
+^MANIFEST\.SKIP$
+^MYMETA\.json$
+^MYMETA\.yml$
+^Test-Regression-
+^\.git
+^_build
+^blib
+~$
