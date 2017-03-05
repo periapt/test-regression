@@ -1,0 +1,8 @@
+/Build
+/Build.bat
+/META*
+/MYMETA*
+/Makefile.PL
+/Test-Regression-*
+/_build
+*.bak
