@@ -44,7 +44,7 @@ sub empty_string_function {
     return '';
 }
 
-
+diag "mark tests start";
 test_out("not ok 1 - actual write failed: t/output/f1");
 test_out("not ok 2 - f1 check");
 test_out("not ok 3 - actual write failed: t/output/f2");
